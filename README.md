@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://bistadinesh03.github.io/Portfolio/">
+  <a href="https://bistadinesh03.github.io">
     <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Portfolio-blue?style=for-the-badge" alt="Live Demo">
   </a>
 </p>
@@ -19,7 +19,7 @@ This repository contains the source code for my personal portfolio website.
 ## Tech Stack
 
 ```text
-HTML5 • CSS3 • JavaScript • PHP
+HTML5 • CSS3 • JavaScript
 ```
 
 ## Features
