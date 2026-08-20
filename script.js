@@ -258,13 +258,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VISITOR COUNTER (CounterAPI) - NO SIGNUP REQUIRED
-    // This works instantly on GitHub Pages.
+    // VISITOR COUNTER (CounterAPI v2) - NO SIGNUP REQUIRED
+    // Updated to fix the deprecated v1 error.
     // =========================================================
     const counterElement = document.getElementById("count-number");
     if (counterElement) {
-        // Fetch real visit count using the free CounterAPI service
-        fetch("https://api.counterapi.dev/v1/visit/bistadinesh/portfolio/")
+        // Fetch real visit count using the updated CounterAPI v2 endpoint
+        fetch("https://api.counterapi.dev/api/v2/visit/bistadinesh/portfolio/")
             .then(response => response.json())
             .then(data => {
                 // Update the number in the footer with comma formatting (e.g., 1,284)
