@@ -411,16 +411,6 @@ footer { background: var(--bg-alt); color: var(--footer-text); padding: 40px 0; 
 .footer-links a { color: var(--text-secondary); font-size: 1.2rem; transition: color 0.2s; }
 .footer-links a:hover, .footer-links a:focus-visible { color: var(--accent); }
 
-/* Updated Footer Text formatting to support visitor counter */
-.footer-text {
-    margin-top: 0.5rem;
-    color: var(--text-light);
-    font-size: 0.875rem;
-}
-.visitor-label {
-    font-weight: 400;
-}
-
 /* Responsive Breakpoints */
 @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
