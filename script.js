@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const result = await response.json();
                 
                 if (response.ok && result.success === "true") {
-                    responseMsg.textContent = "✅ Message sent successfully! I'll get back to you soon.";
+                    responseMsg.textContent = "Message sent successfully! I'll get back to you soon.";
                     responseMsg.className = "success";
                     form.reset();
                 } else {
