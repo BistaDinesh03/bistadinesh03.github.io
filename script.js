@@ -256,23 +256,4 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('scroll', highlightNavLink);
         highlightNavLink(); // Call once on load
     }
-
-    // =========================================================
-    // VISITOR COUNTER (CountAPI) - 100% Compatible with Brave
-    // =========================================================
-    const counterElement = document.getElementById("count-number");
-    if (counterElement) {
-        // Fetch a real, public, unique counter for your domain
-        fetch("https://api.countapi.xyz/hit/bistadinesh03.github.io/visitor")
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.value) {
-                    counterElement.textContent = data.value.toLocaleString();
-                }
-            })
-            .catch(error => {
-                console.warn("Visitor counter issue:", error);
-                counterElement.textContent = "--";
-            });
-    }
 });
