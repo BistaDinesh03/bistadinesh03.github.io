@@ -256,4 +256,25 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('scroll', highlightNavLink);
         highlightNavLink(); // Call once on load
     }
+
+    // =========================================================
+    // VISITOR COUNTER (GoatCounter) - Lightweight, Privacy First
+    // =========================================================
+    const counterElement = document.getElementById("count-number");
+    if (counterElement) {
+        // We fetch the count from GoatCounter's public API for your site code 'bistadinesh'
+        fetch("https://bistadinesh.goatcounter.com/counter//")
+            .then(response => response.json())
+            .then(data => {
+                // Update the number in the footer
+                if (data && data.count) {
+                    counterElement.textContent = data.count.toLocaleString(); // Adds commas (e.g., 1,284)
+                }
+            })
+            .catch(error => {
+                // Silently fail if the counter doesn't load. No errors shown to visitor.
+                console.warn("Visitor counter issue:", error);
+                counterElement.textContent = "--";
+            });
+    }
 });
