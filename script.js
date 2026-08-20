@@ -258,22 +258,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VISITOR COUNTER (CountAPI) - NO SIGNUP, STABLE, WORKING
+    // VISITOR COUNTER (CountAPI) - NO-CORS FIX
     // =========================================================
     const counterElement = document.getElementById("count-number");
     if (counterElement) {
-        // CountAPI endpoint (very reliable)
-        fetch("https://api.countapi.xyz/hit/bistadinesh/portfolio/")
+        // Step 1: Send a "Ping" to record the visit using an invisible Image tag (Always works)
+        const img = new Image();
+        // This records the visit on the server
+        img.src = "https://api.countapi.xyz/hit/bistadinesh/portfolio/";
+        img.style.display = "none"; // Hides the image
+        document.body.appendChild(img);
+
+        // Step 2: Fetch the current count to display in the footer
+        fetch("https://api.countapi.xyz/get/bistadinesh/portfolio/")
             .then(response => response.json())
             .then(data => {
-                // Update the number in the footer with comma formatting
-                if (data && data.value) {
+                if (data && data.value !== undefined) {
                     counterElement.textContent = data.value.toLocaleString(); 
                 }
             })
             .catch(error => {
-                // If the API fails, it stays at 0. Nothing breaks.
-                console.warn("Visitor counter issue:", error);
+                console.warn("Visitor counter display issue:", error);
+                // If it fails, we simply leave it as 0. No broken UI.
             });
     }
 });
