@@ -258,21 +258,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VISITOR COUNTER (GoatCounter) - Lightweight, Privacy First
+    // VISITOR COUNTER (CountAPI) - 100% Compatible with Brave
     // =========================================================
     const counterElement = document.getElementById("count-number");
     if (counterElement) {
-        // We fetch the count from GoatCounter's public API for your site code 'bistadinesh'
-        fetch("https://bistadinesh03.goatcounter.com/counter//")
+        // Fetch a real, public, unique counter for your domain
+        fetch("https://api.countapi.xyz/hit/bistadinesh03.github.io/visitor")
             .then(response => response.json())
             .then(data => {
-                // Update the number in the footer
-                if (data && data.count) {
-                    counterElement.textContent = data.count.toLocaleString(); // Adds commas (e.g., 1,284)
+                if (data && data.value) {
+                    counterElement.textContent = data.value.toLocaleString();
                 }
             })
             .catch(error => {
-                // Silently fail if the counter doesn't load. No errors shown to visitor.
                 console.warn("Visitor counter issue:", error);
                 counterElement.textContent = "--";
             });
