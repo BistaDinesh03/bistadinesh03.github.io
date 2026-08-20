@@ -258,22 +258,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VISITOR COUNTER (CounterAPI v2) - NO SIGNUP REQUIRED
-    // Updated to fix the deprecated v1 error.
+    // VISITOR COUNTER (CountAPI) - NO SIGNUP, STABLE, WORKING
     // =========================================================
     const counterElement = document.getElementById("count-number");
     if (counterElement) {
-        // Fetch real visit count using the updated CounterAPI v2 endpoint
-        fetch("https://api.counterapi.dev/api/v2/visit/bistadinesh/portfolio/")
+        // CountAPI endpoint (very reliable)
+        fetch("https://api.countapi.xyz/hit/bistadinesh/portfolio/")
             .then(response => response.json())
             .then(data => {
-                // Update the number in the footer with comma formatting (e.g., 1,284)
-                if (data && data.count) {
-                    counterElement.textContent = data.count.toLocaleString(); 
+                // Update the number in the footer with comma formatting
+                if (data && data.value) {
+                    counterElement.textContent = data.value.toLocaleString(); 
                 }
             })
             .catch(error => {
-                // If the API fails, it simply stays at 0. Nothing breaks.
+                // If the API fails, it stays at 0. Nothing breaks.
                 console.warn("Visitor counter issue:", error);
             });
     }
