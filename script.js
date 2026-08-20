@@ -258,23 +258,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VISITOR COUNTER (GoatCounter) - Lightweight, Privacy First
+    // VISITOR COUNTER (CounterAPI) - NO SIGNUP REQUIRED
+    // This works instantly on GitHub Pages.
     // =========================================================
     const counterElement = document.getElementById("count-number");
     if (counterElement) {
-        // We fetch the count from GoatCounter's public API for your site code 'bistadinesh'
-        fetch("https://bistadinesh.goatcounter.com/counter//")
+        // Fetch real visit count using the free CounterAPI service
+        fetch("https://api.counterapi.dev/v1/visit/bistadinesh/portfolio/")
             .then(response => response.json())
             .then(data => {
-                // Update the number in the footer
+                // Update the number in the footer with comma formatting (e.g., 1,284)
                 if (data && data.count) {
-                    counterElement.textContent = data.count.toLocaleString(); // Adds commas (e.g., 1,284)
+                    counterElement.textContent = data.count.toLocaleString(); 
                 }
             })
             .catch(error => {
-                // Silently fail if the counter doesn't load. No errors shown to visitor.
+                // If the API fails, it simply stays at 0. Nothing breaks.
                 console.warn("Visitor counter issue:", error);
-                counterElement.textContent = "--";
             });
     }
 });
