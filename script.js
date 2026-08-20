@@ -258,27 +258,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VISITOR COUNTER (Cloudflare IPFS Proxy for CountAPI)
-    // Bypasses ad-blockers and DNS blocks entirely.
+    // VISITOR COUNTER (GoatCounter) - Lightweight, Privacy First
     // =========================================================
     const counterElement = document.getElementById("count-number");
     if (counterElement) {
-        // Step 1: Record the visit using the Cloudflare IPFS proxy
-        const img = new Image();
-        img.src = "https://cloudflare-ipfs.com/ipns/api.countapi.xyz/hit/bistadinesh/portfolio/";
-        img.style.display = "none";
-        document.body.appendChild(img);
-
-        // Step 2: Fetch the count using the Cloudflare proxy to display it
-        fetch("https://cloudflare-ipfs.com/ipns/api.countapi.xyz/get/bistadinesh/portfolio/")
+        // We fetch the count from GoatCounter's public API for your site code 'bistadinesh'
+        fetch("https://bistadinesh.goatcounter.com/counter//")
             .then(response => response.json())
             .then(data => {
-                if (data && data.value !== undefined) {
-                    counterElement.textContent = data.value.toLocaleString(); 
+                // Update the number in the footer
+                if (data && data.count) {
+                    counterElement.textContent = data.count.toLocaleString(); // Adds commas (e.g., 1,284)
                 }
             })
             .catch(error => {
-                console.warn("Visitor counter display issue:", error);
+                // Silently fail if the counter doesn't load. No errors shown to visitor.
+                console.warn("Visitor counter issue:", error);
+                counterElement.textContent = "--";
             });
     }
 });
