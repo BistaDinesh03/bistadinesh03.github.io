@@ -258,19 +258,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VISITOR COUNTER (CountAPI) - NO-CORS FIX
+    // VISITOR COUNTER (Cloudflare IPFS Proxy for CountAPI)
+    // Bypasses ad-blockers and DNS blocks entirely.
     // =========================================================
     const counterElement = document.getElementById("count-number");
     if (counterElement) {
-        // Step 1: Send a "Ping" to record the visit using an invisible Image tag (Always works)
+        // Step 1: Record the visit using the Cloudflare IPFS proxy
         const img = new Image();
-        // This records the visit on the server
-        img.src = "https://api.countapi.xyz/hit/bistadinesh/portfolio/";
-        img.style.display = "none"; // Hides the image
+        img.src = "https://cloudflare-ipfs.com/ipns/api.countapi.xyz/hit/bistadinesh/portfolio/";
+        img.style.display = "none";
         document.body.appendChild(img);
 
-        // Step 2: Fetch the current count to display in the footer
-        fetch("https://api.countapi.xyz/get/bistadinesh/portfolio/")
+        // Step 2: Fetch the count using the Cloudflare proxy to display it
+        fetch("https://cloudflare-ipfs.com/ipns/api.countapi.xyz/get/bistadinesh/portfolio/")
             .then(response => response.json())
             .then(data => {
                 if (data && data.value !== undefined) {
@@ -279,7 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(error => {
                 console.warn("Visitor counter display issue:", error);
-                // If it fails, we simply leave it as 0. No broken UI.
             });
     }
 });
