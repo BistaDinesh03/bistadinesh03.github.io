@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const counterElement = document.getElementById("count-number");
     if (counterElement) {
         // We fetch the count from GoatCounter's public API for your site code 'bistadinesh'
-        fetch("https://bistadinesh.goatcounter.com/counter//")
+        fetch("https://bistadinesh03.goatcounter.com/counter//")
             .then(response => response.json())
             .then(data => {
                 // Update the number in the footer
