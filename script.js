@@ -3,10 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeToggle = document.getElementById("theme-toggle");
     const htmlElement = document.documentElement;
     
-    // Safety check for theme toggle
     if (themeToggle) {
         const icon = themeToggle.querySelector("i");
-        
         const currentTheme = localStorage.getItem("theme");
 
         if (currentTheme) {
@@ -68,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Close mobile menu on outside click
     document.addEventListener("click", (e) => {
         if (navMenu && navMenu.classList.contains("active") && 
             !navMenu.contains(e.target) && 
@@ -82,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Close mobile menu on Escape key
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && navMenu && navMenu.classList.contains("active")) {
             navMenu.classList.remove("active");
@@ -100,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
 
-            // Clear previous errors
             document.querySelectorAll(".error-msg").forEach(el => el.textContent = "");
             const responseMsg = document.getElementById("responseMessage");
             responseMsg.className = "hidden";
@@ -112,10 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const spinner = document.getElementById("spinner");
             const btnText = document.getElementById("buttonText");
             
-            // Enhanced validation
             let isValid = true;
             
-            // Name validation
             if (!name) { 
                 document.getElementById("nameError").textContent = "Name is required."; 
                 isValid = false; 
@@ -124,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 isValid = false; 
             }
             
-            // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!email) { 
                 document.getElementById("emailError").textContent = "Email is required."; 
@@ -134,7 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 isValid = false; 
             }
             
-            // Message validation
             if (!message) { 
                 document.getElementById("messageError").textContent = "Message is required."; 
                 isValid = false; 
@@ -145,13 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!isValid) return;
 
-            // Show loading state
             btn.disabled = true;
             spinner.classList.remove("hidden");
             btnText.textContent = "Sending...";
 
             try {
-                // FormSubmit AJAX endpoint with your Gmail
                 const response = await fetch("https://formsubmit.co/ajax/bistadinesh642@gmail.com", {
                     method: "POST",
                     headers: {
@@ -164,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         message: message,
                         _subject: "New Portfolio Contact Message",
                         _template: "table",
-                        _captcha: "false" // Change to "true" for production
+                        _captcha: "false"
                     })
                 });
 
@@ -176,31 +165,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     form.reset();
                 } else {
                     let errorMsg = "Something went wrong. Please try again.";
-                    if (result.message) {
-                        errorMsg = result.message;
-                    } else if (result.error) {
-                        errorMsg = result.error;
-                    }
+                    if (result.message) errorMsg = result.message;
+                    else if (result.error) errorMsg = result.error;
                     responseMsg.textContent = errorMsg;
                     responseMsg.className = "error";
                 }
 
             } catch (error) {
                 console.error("Form submission error:", error);
-                responseMsg.textContent = "Network error. Please try again or email me directly at bistadinesh642@gmail.com";
+                responseMsg.textContent = "Network error. Please try again or email me directly at dineshbista123@outlook.com";
                 responseMsg.className = "error";
             } finally {
-                // Reset button state
                 btn.disabled = false;
                 spinner.classList.add("hidden");
                 btnText.textContent = "Send Message";
                 
-                // Clear any existing timeout
                 if (window.responseTimeout) {
                     clearTimeout(window.responseTimeout);
                 }
                 
-                // Auto-hide message after 6 seconds
                 window.responseTimeout = setTimeout(() => {
                     if (responseMsg.className !== "hidden") {
                         responseMsg.className = "hidden";
@@ -251,9 +234,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     
-    // Only add scroll listener if we have sections and nav links
     if (sections.length > 0 && navLinkItems.length > 0) {
         window.addEventListener('scroll', highlightNavLink);
-        highlightNavLink(); // Call once on load
+        highlightNavLink();
     }
+
+    // --- SCROLL REVEAL ANIMATIONS ---
+    const revealElements = document.querySelectorAll('.project-card, .skill-category, .timeline-item, .section-header');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    });
+
+    revealElements.forEach(el => {
+        el.classList.add('reveal-on-scroll');
+        revealObserver.observe(el);
+    });
 });
